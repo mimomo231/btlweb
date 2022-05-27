@@ -54,13 +54,13 @@
                                         if (auth != null) {
                                     %>
                                     <li><a href="logout">Logout</a></li>
-                                    <li><a href="http://instagram.com/">Follow our <em>instagram</em><i class="fa fa-instagram"></i></a></li>
+                                    <li><a href="#">Booking Information</a></li>
                                             <%
                                             } else {
                                             %>
                                     <li><a href="loginView.jsp">Login</a></li>
                                     <li><a href="registerView.jsp">Register</a></li>
-                                    <li><a href="http://instagram.com/">Follow our <em>instagram</em><i class="fa fa-instagram"></i></a></li>
+                                   
                                             <%
                                                 }
                                             %>
