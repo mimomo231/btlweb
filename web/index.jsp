@@ -60,12 +60,13 @@
                                             %>
                                     <li><a href="loginView.jsp">Login</a></li>
                                     <li><a href="registerView.jsp">Register</a></li>
-                                   
+                                    
                                             <%
                                                 }
                                             %>
 
                                 </ul>
+                                <br/><br/><br/>
                             </div>
                             <div class="page-direction-button">
                                 <a href="contact.html"><i class="fa fa-phone"></i>Contact Us Now</a>
@@ -281,7 +282,7 @@
                         <c:forEach items="${requestScope.hotels}" var="i">
                             <div class="item col-md-12">
                             <div class="visited-item">
-                                <img src="img/place-02.jpg" alt="Khách sạn ${i.name}">
+                                <a href="inforhotel?hid=${i.id}"><img src="img/${i.image}" alt="Khách sạn ${i.name}"></a>
                                 <div class="text-content">
                                     <h4>Khách sạn ${i.star} sao pro pro</h4>
                                     <span>${i.name}</span>
