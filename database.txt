@@ -1,0 +1,314 @@
+-- phpMyAdmin SQL Dump
+-- version 5.1.3
+-- https://www.phpmyadmin.net/
+--
+-- Máy chủ: 127.0.0.1:3307
+-- Thời gian đã tạo: Th5 27, 2022 lúc 07:08 PM
+-- Phiên bản máy phục vụ: 10.4.24-MariaDB
+-- Phiên bản PHP: 8.1.5
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+--
+-- Cơ sở dữ liệu: `btlweb`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `tblbill`
+--
+
+CREATE TABLE `tblbill` (
+  `id` int(11) NOT NULL,
+  `paymentDate` date DEFAULT NULL,
+  `paymentMethod` varchar(50) DEFAULT NULL,
+  `amount` float DEFAULT NULL,
+  `note` varchar(255) DEFAULT NULL,
+  `bookingID` int(11) DEFAULT NULL,
+  `userID` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `tblbill`
+--
+
+INSERT INTO `tblbill` (`id`, `paymentDate`, `paymentMethod`, `amount`, `note`, `bookingID`, `userID`) VALUES
+(1, '2022-05-20', 'Chuyển khoản', 2500000, 'Done', 1, 2),
+(2, '2022-05-21', 'Chuyển khoản', 900000, 'Done', 2, 3),
+(3, '2022-05-24', 'Chuyển Khoản', 600000, 'Done', 3, 4);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `tblbookedroom`
+--
+
+CREATE TABLE `tblbookedroom` (
+  `id` int(11) NOT NULL,
+  `checkin` date DEFAULT NULL,
+  `checkout` date DEFAULT NULL,
+  `price` float DEFAULT NULL,
+  `bookingID` int(11) DEFAULT NULL,
+  `roomID` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `tblbookedroom`
+--
+
+INSERT INTO `tblbookedroom` (`id`, `checkin`, `checkout`, `price`, `bookingID`, `roomID`) VALUES
+(1, '2022-05-20', '2022-05-25', 500000, 1, 4),
+(2, '2022-05-21', '2022-05-24', 300000, 2, 11),
+(3, '2022-05-24', '2022-05-26', 300000, 3, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `tblbooking`
+--
+
+CREATE TABLE `tblbooking` (
+  `id` int(11) NOT NULL,
+  `bookingDate` date DEFAULT NULL,
+  `note` varchar(255) DEFAULT NULL,
+  `userID` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `tblbooking`
+--
+
+INSERT INTO `tblbooking` (`id`, `bookingDate`, `note`, `userID`) VALUES
+(1, '2022-05-20', 'NULL', 2),
+(2, '2022-05-21', 'NULL', 3),
+(3, '2022-05-24', 'NULL', 4);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `tblhotel`
+--
+
+CREATE TABLE `tblhotel` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) DEFAULT NULL,
+  `address` varchar(50) DEFAULT NULL,
+  `star` int(11) DEFAULT NULL,
+  `des` varchar(255) DEFAULT NULL,
+  `image` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `tblhotel`
+--
+
+INSERT INTO `tblhotel` (`id`, `name`, `address`, `star`, `des`, `image`) VALUES
+(1, 'Hoa Hồng', 'Hà Nội', 5, 'Tốt', ''),
+(2, 'Hoa Cúc', 'Hồ Chí Minh', 5, 'Tốt', ''),
+(3, 'Hoa Ly', 'Vinh', 4, 'Tốt', ''),
+(4, 'Hoa Nhài', 'Đà Nẵng', 3, 'Tốt', ''),
+(5, 'Hoa Hướng Dương', 'Hà Nội', 4, 'Tốt', ''),
+(6, 'Nhà Rơm', 'Huế', 2, 'Tốt', ''),
+(11, 'Nhà Gỗ', 'Nha Trang', 5, 'Tốt', '');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `tblroom`
+--
+
+CREATE TABLE `tblroom` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) DEFAULT NULL,
+  `type` varchar(50) DEFAULT NULL,
+  `price` float DEFAULT NULL,
+  `des` varchar(255) DEFAULT NULL,
+  `image` varchar(50) DEFAULT NULL,
+  `hotelID` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `tblroom`
+--
+
+INSERT INTO `tblroom` (`id`, `name`, `type`, `price`, `des`, `image`, `hotelID`) VALUES
+(1, '201', 'Lớn', 500000, 'Tốt', '', 1),
+(2, '202', 'Nhỏ', 300000, 'Tốt', '', 1),
+(3, '203', 'Nhỏ', 300000, 'Tốt', '', 1),
+(4, '301', 'Lớn', 500000, 'Tốt', '', 1),
+(5, '302', 'Nhỏ', 300000, 'Tốt', '', 1),
+(6, '303', 'Nhỏ', 300000, 'Tốt', '', 1),
+(7, '201', 'Lớn', 500000, 'Tốt', '', 2),
+(8, '202', 'Nhỏ', 300000, 'Tốt', '', 2),
+(9, '203', 'Nhỏ', 300000, 'Tốt', '', 2),
+(10, '301', 'Lớn', 500000, 'Tốt', '', 2),
+(11, '302', 'Nhỏ', 300000, 'Tốt', '', 2),
+(12, '303', 'Nhỏ', 300000, 'Tốt', '', 2),
+(13, '201', 'Lớn', 500000, 'Tốt', '', 3),
+(14, '202', 'Nhỏ', 300000, 'Tốt', '', 3),
+(15, '203', 'Nhỏ', 300000, 'Tốt', '', 3),
+(16, '301', 'Lớn', 500000, 'Tốt', '', 3),
+(17, '302', 'Nhỏ', 300000, 'Tốt', '', 3),
+(18, '303', 'Nhỏ', 300000, 'Tốt', '', 3),
+(19, '201', 'Lớn', 300000, 'Tốt', '', 4),
+(20, '202', 'Nhỏ', 200000, 'Tốt', '', 4),
+(21, '203', 'Nhỏ', 200000, 'Tốt', '', 4),
+(22, '301', 'Lớn', 300000, 'Tốt', '', 4),
+(23, '302', 'Nhỏ', 200000, 'Tốt', '', 4),
+(24, '303', 'Nhỏ', 200000, 'Tốt', '', 4),
+(25, '201', 'Lớn', 450000, 'Tốt', '', 5),
+(26, '202', 'Nhỏ', 200000, 'Tốt', '', 5),
+(27, '203', 'Nhỏ', 200000, 'Tốt', '', 5),
+(28, '301', 'Lớn', 450000, 'Tốt', '', 5),
+(29, '302', 'Nhỏ', 200000, 'Tốt', '', 5),
+(30, '303', 'Nhỏ', 200000, 'Tốt', '', 5),
+(31, '201', 'Lớn', 200000, 'Tốt', '', 6),
+(32, '202', 'Nhỏ', 100000, 'Tốt', '', 6),
+(34, '203', 'Nhỏ', 250000, 'Tốt', '', 6);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `tbluser`
+--
+
+CREATE TABLE `tbluser` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `username` varchar(50) DEFAULT NULL,
+  `pass` varchar(50) DEFAULT NULL,
+  `role` tinyint(1) DEFAULT NULL,
+  `note` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `tbluser`
+--
+
+INSERT INTO `tbluser` (`id`, `name`, `email`, `username`, `pass`, `role`, `note`) VALUES
+(1, 'Administrator', 'admin@123', 'admin', 'admin', 1, 'Administrator'),
+(2, 'NT Dương', 'duongnt@gmail.com', 'duongnt', '123456', 0, 'Khách hàng'),
+(3, 'NV Hiếu', 'hieunv@gmail.com', 'hieunv', '123456', 0, 'Khách hàng'),
+(4, 'LK Linh', 'linhlk@gmail.com', 'linhlk', '123456', 0, 'Khách hàng'),
+(7, 'NT Thăng', 'thangnt@gmail.com', 'thangnt', '123456', 0, 'Khách hàng');
+
+--
+-- Chỉ mục cho các bảng đã đổ
+--
+
+--
+-- Chỉ mục cho bảng `tblbill`
+--
+ALTER TABLE `tblbill`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `bookingID` (`bookingID`),
+  ADD KEY `userID` (`userID`);
+
+--
+-- Chỉ mục cho bảng `tblbookedroom`
+--
+ALTER TABLE `tblbookedroom`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `bookingID` (`bookingID`),
+  ADD KEY `roomID` (`roomID`);
+
+--
+-- Chỉ mục cho bảng `tblbooking`
+--
+ALTER TABLE `tblbooking`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `userID` (`userID`);
+
+--
+-- Chỉ mục cho bảng `tblhotel`
+--
+ALTER TABLE `tblhotel`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `tblroom`
+--
+ALTER TABLE `tblroom`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `hotelID` (`hotelID`);
+
+--
+-- Chỉ mục cho bảng `tbluser`
+--
+ALTER TABLE `tbluser`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT cho các bảng đã đổ
+--
+
+--
+-- AUTO_INCREMENT cho bảng `tblbill`
+--
+ALTER TABLE `tblbill`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT cho bảng `tblbookedroom`
+--
+ALTER TABLE `tblbookedroom`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT cho bảng `tblbooking`
+--
+ALTER TABLE `tblbooking`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT cho bảng `tblhotel`
+--
+ALTER TABLE `tblhotel`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT cho bảng `tblroom`
+--
+ALTER TABLE `tblroom`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+
+--
+-- AUTO_INCREMENT cho bảng `tbluser`
+--
+ALTER TABLE `tbluser`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- Các ràng buộc cho các bảng đã đổ
+--
+
+--
+-- Các ràng buộc cho bảng `tblbill`
+--
+ALTER TABLE `tblbill`
+  ADD CONSTRAINT `tblbill_ibfk_1` FOREIGN KEY (`bookingID`) REFERENCES `tblbooking` (`id`),
+  ADD CONSTRAINT `tblbill_ibfk_2` FOREIGN KEY (`userID`) REFERENCES `tbluser` (`id`);
+
+--
+-- Các ràng buộc cho bảng `tblbookedroom`
+--
+ALTER TABLE `tblbookedroom`
+  ADD CONSTRAINT `tblbookedroom_ibfk_1` FOREIGN KEY (`bookingID`) REFERENCES `tblbooking` (`id`),
+  ADD CONSTRAINT `tblbookedroom_ibfk_2` FOREIGN KEY (`roomID`) REFERENCES `tblroom` (`id`);
+
+--
+-- Các ràng buộc cho bảng `tblbooking`
+--
+ALTER TABLE `tblbooking`
+  ADD CONSTRAINT `tblbooking_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `tbluser` (`id`);
+
+--
+-- Các ràng buộc cho bảng `tblroom`
+--
+ALTER TABLE `tblroom`
+  ADD CONSTRAINT `tblroom_ibfk_1` FOREIGN KEY (`hotelID`) REFERENCES `tblhotel` (`id`);
+COMMIT;
